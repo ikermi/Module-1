@@ -1,0 +1,66 @@
+----------------- html --------------------------
+
+<div class="taskOne">
+    <p>This text is changed via variable</p>
+</div>
+
+<div class="taskTwo">
+  <p>Color changed via mixin</p>
+</div>
+
+<div class="taskThree">
+  <div class="nestedDiv">
+    <p>Color changed via SCSS nesting</p>
+  </div>
+</div>
+
+<div class="taskFour">
+  <div>Backgound changed</div>
+  <div>via mixin</div>
+</div>
+
+<div class="taskFive">
+  there will be a maserati below in the background
+</div>
+
+----------------- css --------------------------
+
+$textColorOne: red;
+$backgroundColorOne: #237C95;
+$backgroundImage: 'maserati';
+
+@mixin changecolor {
+  color: $textColorOne;
+}
+
+@mixin mixinTwo{
+  background-color: $backgroundColorOne;
+  height: 200px;
+  width: 200px;
+  margin: 10px 10px 10px 10px
+}
+
+.taskOne p{
+  color: $textColorOne;
+}
+
+.taskTwo p{
+  @include changecolor
+}
+
+.taskThree{
+  .nestedDiv{
+    color: $textColorOne;
+  }
+}
+
+.taskFour{
+  @include mixinTwo;
+}
+
+.taskFive{
+  background-image: url('https://s3.amazonaws.com/bottega-devcamp/scss/cars/#{$backgroundImage}.jpg');
+  width: 300px;
+  height: 300px;
+  object-fit: fill;
+}

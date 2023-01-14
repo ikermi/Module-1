@@ -1,0 +1,76 @@
+---------------------- Conditionals examples -----------------------------------
+
+@mixin featured($bg-color: 'dark') {
+  @if $bg-color == 'light' {
+    color: Tomato;  
+  } @else if $bg-color == 'dark' {
+    color: blue;  
+  } @else {
+    color: red; 
+  }
+}
+
+@mixin flex-config($justify-content: false, $flex: false, $flex-direction: false, $align-items: false) {
+  display: flex;
+
+  @if $justify-content != false {
+    justify-content: $justify-content;
+  }
+
+  @if $flex != false {
+    flex: $flex;
+  }
+
+  @if $flex-direction != false {
+    flex-direction: $flex-direction;
+  }
+
+  @if $align-items != false {
+    align-items: $align-items;
+  }
+}
+
+---------------------- @each and string interpolation examples -----------------------------------
+
+<div class="car-maserati"></div>
+<div class="car-tesla"></div>
+<div class="car-porsche"></div>
+
+// In css
+// List
+$cars: 'maserati', 'tesla', 'porsche';
+
+// Each directive
+@each $car-name in $cars {
+  // String interpolation
+  .car-#{$car-name} {
+    background-image: url('https://s3.amazonaws.com/bottega-devcamp/scss/cars/#{$car-name}.jpg');
+    background-repeat: no-repeat;
+    height: 300px;
+    width: 500px;
+    object-fit: fill;
+    float: left;
+  }
+}
+
+---------------------- @content to not always pass variables-----------------------------------
+
+@mixin notification {
+  width: 99%;
+  height: 35px;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 1.2em;
+  font-family: Verdana;
+  border-radius: 3px;
+  margin: 10px;
+  @content;
+}
+
+.error {
+  @include notification {
+    background-color: DarkRed;
+    color: white;
+    border: 1px solid LightSlateGray;
+  }
+}
